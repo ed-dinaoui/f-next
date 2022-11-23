@@ -1,1 +1,165 @@
+:root{
+  --background : #030303 ;
+  --color : rgb(150,150,150) ;
+  --color-2 : rgb(80,80,80) ;
+  --half-border : rgb(10,10,10) ;
+  --border : rgb(20,20,20) ;
+  --full-border : rgb(30,30,30)
+}
 
+*{
+  margin : 0px ;
+  padding : 0px ;
+  box-sizing : border-box ;
+}
+div {
+  height : 100% ;
+  width : 100% ;
+}
+body , main , div , input , button {
+  display : flex ; 
+  align-items : center ; 
+  justify-content : center ;
+  flex-direction : column ;
+}
+body {
+  align-items : flex-start ;
+  justify-content : flex-end ;
+  height : 100vh ;
+  width : 100% ;
+  background : var(--background) ;
+}
+main {
+  flex-direction : row ;
+  height : 80vh ;
+  width : 70vw ;
+  margin-left : 10vw ;
+}
+p , li , button , input {
+  font-size : 12px ;
+  color : var(--color) ;
+  font-family : monospace ;
+}
+button , input {
+  transition-duration : .3s
+}
+button:hover {
+  filter : brightness(140%)
+}
+
+/*       */
+main > div {
+    justify-content : flex-start ;
+    align-items : flex-start ;
+}
+
+main > div:nth-child(1) {
+    width : 40% ;
+    row-gap: calc(10% - 2em) ;
+}
+main > div:nth-child(1) > * {
+    width : 93%
+}
+main > div:nth-child(1) > input {
+    height : 2.5em ;
+    outline: none ;
+    background : var(--border) ;
+    border : none ;
+    padding :0 1em
+}
+
+/**/
+main > div:nth-child(1) > div {
+    max-height : 90% ;
+    row-gap : 1em ;
+    justify-content : flex-start ;
+    align-items : flex-start ;
+    transition-duration: 1s ;
+    /**/
+    overflow-y : auto ;
+    scroll-behavior: smooth ;
+    scrollbar-width: 5px 10px ;
+    scrollbar-color: var(--half-border) transparent ;
+}
+main > div:nth-child(1) > div::-webkit-scrollbar {
+    width: 5px;
+}
+main > div:nth-child(1) > div::-webkit-scrollbar-track {
+    background: transparent;
+}
+main > div:nth-child(1) > div::-webkit-scrollbar-thumb {
+    background: var(--half-border);
+}
+/**/
+
+/*main > div:nth-child(1) > div::after{
+    content: '';
+    position: absolute;
+    height: 10%;
+    width: 25%;
+    background: linear-gradient(to bottom , rgba(5,5,5,0) , var(--background));
+    top: 90%;
+    pointer-events: none;
+}*/
+
+main > div:nth-child(1) > div > div {
+    min-height : 6em ;
+    max-height : 7em ;
+    background : var(--half-border) ;
+    width : 90% ;
+    justify-content : space-between ;
+    padding : .7em 0 ;
+    transition-duration : .5s ;
+}
+main > div:nth-child(1) > div > div > * {
+    width : 90% ;
+    height : contain ;
+}
+main > div:nth-child(1) > div > div > div {
+    flex-direction : row ;
+    column-gap : 1em ;
+}
+main > div:nth-child(1) > div > div > div:nth-last-child(1) {
+    justify-content : flex-end ;
+}
+main > div:nth-child(1) > div > div > div:nth-last-child(2) {
+    justify-content : flex-start
+}
+main > div:nth-child(1) > div > div > div:nth-last-child(3) {
+    justify-content : space-between ;
+}
+main > div:nth-child(1) > div > div > div:nth-child(1) > p {
+    max-width : 90%
+}
+main > div:nth-child(1) > div > div > div:nth-child(1) > p:nth-child(2),
+main > div:nth-child(1) > div > div > div:nth-child(3) > p{
+    cursor : pointer ;
+    color : var(--color-2)
+}
+main > div:nth-child(1) > div > div button {
+    width : 5em ;
+    height : 1.8em ;
+    border-radius : 1em ;
+    text-align : center ;
+    background : var(--background) ; 
+    border : none ;
+    cursor : pointer ;
+}
+main > div:nth-child(2) {
+    width : 10% ;
+    row-gap : calc(10% - 2em) ;
+}
+main > div:nth-child(2) > button {
+    width : 100% ;
+    background : transparent ;
+    border : 1px solid  var(--border);
+    height : 2.5em ;
+    cursor : pointer ;
+}
+
+@media only screen and ( max-width : 900px ) {
+    main { width : 100% ; margin-left : 0px }
+    main > div:nth-child(2) {width : 20% }
+    main > div:nth-child(1) {width : 70% ;
+        align-items : flex-end }
+}
