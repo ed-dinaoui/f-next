@@ -35,7 +35,6 @@ function getVideoInfo ( videoUrl , format , call ) {
   } , options = Object.assign( is_audio(format) , {
         noCheckCertificates: true,
         noWarnings: true,
-        ffmpegLocation : '../../node_modules/ffmpeg/index' ,
         addHeader: [
           'referer:youtube.com',
           'user-agent:googlebot'
