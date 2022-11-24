@@ -16,7 +16,7 @@ function InfoCard (props) {
                 <p> { info.title } </p>
                 <p onClick={ () => {
                     set_is(false) ;
-                    fetch("/api/server?WHAT=rm&ID="+info.id) ;
+                    fetch("../api/server?WHAT=rm&ID="+info.id) ;
                 } } >x</p>
             </div>
             <div>
@@ -30,8 +30,8 @@ function InfoCard (props) {
                             () => {
                             set_load(true) ;
                             let f = ( info.media_type === 'mp3' ) ? 'mp4' : 'mp3' ;
-                            fetch('/api/server?WHAT=rm&ID=' + info.id ) ;
-                            fetch(`/api/server?WHAT=info&F=${f}&URL=${info.url}`)
+                            fetch('../api/server?WHAT=rm&ID=' + info.id ) ;
+                            fetch(`../api/server?WHAT=info&F=${f}&URL=${info.url}`)
                                 .then(res => res.json())
                                 .then(
                                     data => {
@@ -59,7 +59,7 @@ function Info () {
     const [ a , set_a ] = useState([])
     
     up_ga_a = () => {
-        fetch("/api/server?WHAT=media")
+        fetch("../api/server?WHAT=media")
         .then(res => res.json())
         .then(data => {
             data.media.forEach(ob => {

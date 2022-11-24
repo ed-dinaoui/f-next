@@ -13,7 +13,7 @@ export default function AddBtn() {
           va = ( s.length <= 8 ) ? s.replace('.' , '') : s.split('.')[1] ;
       if( va === 'youtube' ){
         set_load(true) ;
-        fetch("/api/server?WHAT=info&F=mp4&URL=" + val)
+        fetch(  "../api/server?WHAT=info&F=mp4&URL=" + val)
           .then((res) => res.json())
           .then( d => {
             up_ga_a() ;
