@@ -1,6 +1,5 @@
 const fs = require('fs') ,
-      youtubedl = require('youtube-dl-exec') ,
-      ffmpeg = require('ffmpeg') ;
+      youtubedl = require('youtube-dl-exec') ;
       
 class M_Array {
   constructor(  ){
