@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { up_ga_a } from "./info";
 
-export function AddBtn() {
+export default function AddBtn() {
   const [ load , set_load ] = useState(false) ;
   
   var click = () => {
