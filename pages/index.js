@@ -1,5 +1,5 @@
 import Info from './components/info' ;
-import { AddBtn , DoAllBtn , Input } from './components/form' ;
+import AddBtn , { DoAllBtn , Input } from './components/form' ;
 
 
 export default function Home() {
