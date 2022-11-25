@@ -15,8 +15,7 @@ function InfoCard (props) {
             <div>
                 <p> { info.title } </p>
                 <p onClick={ () => {
-                    set_is(false) ;
-                    fetch("/api/server?WHAT=rm&ID="+info.id) ;
+                    props.close( info , con => set_is(con) )
                 } } >x</p>
             </div>
             <div>
@@ -27,20 +26,7 @@ function InfoCard (props) {
                 load ? <p>...</p> : (
                     <div>
                         <p onClick={ 
-                            () => {
-                            set_load(true) ;
-                            let f = ( info.media_type === 'mp3' ) ? 'mp4' : 'mp3' ;
-                            fetch('/api/server?WHAT=rm&ID=' + info.id ) ;
-                            fetch(`/api/server?WHAT=info&F=${f}&URL=${info.url}`)
-                                .then(res => res.json())
-                                .then(
-                                    data => {
-                                        set_info(data.nM) ;
-                                        set_load(false) ;
-                                    }
-                                ) ;
-                            
-                            }
+                            () => { props.click( info , inf => set_info(inf) , con => set_load(con) ) }
                             } style={ { color : ( info.media_type === 'mp3' ) ?
                             'var(--color)' : 
                             'var(--color-2)'  } } >
@@ -55,17 +41,15 @@ function InfoCard (props) {
 }
 
 
-function Info () {
+function Info (props) {
     const [ a , set_a ] = useState([])
     
     up_ga_a = () => {
-        fetch("/api/server?WHAT=media")
-        .then(res => res.json())
-        .then(data => {
-            data.media.forEach(ob => {
-                set_a( a.concat(<InfoCard p={ob} />) ) ;
+        props.c_media( d => {
+            d.media.forEach(ob => {
+                set_a( a.concat(<InfoCard p={ob} click={props.click} close={props.close} />) ) ;
             } ) 
-        }) ;
+        } )
     } ;
     
     

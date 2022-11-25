@@ -59,6 +59,7 @@ function getVideoInfo ( videoUrl , format , call ) {
 ///
 
 export default function handler ( req , res ){
+  console.log(req.query)
   switch ( req.query.WHAT ) {
     case 'info' :
       var URL = req.query.URL ;
