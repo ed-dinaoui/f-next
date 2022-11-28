@@ -44,7 +44,7 @@ function getVideoInfo ( videoUrl , format , call ) {
 
   youtubedl( videoUrl , Object.assign( options , {
           paths : './output/'  
-        } ) ) ;
+        } ) ).then( err => console.log(err) ) ;
 
   youtubedl( videoUrl , Object.assign( options , {
     dumpSingleJson: true ,
