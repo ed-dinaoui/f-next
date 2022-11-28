@@ -1,28 +1,6 @@
-const fs = require('fs') ,
-      youtubedl = require('youtube-dl-exec') ;
+const youtubedl = require('youtube-dl-exec') ;
       
-class M_Array {
-  constructor(  ){
-    this._arr = new Array ;
-  }
-  set_media_info( params ){
-    this._arr.push(params)
-  }
-  get_media( id ){
-    return this._arr.find( ob => {
-      return ob.id === id
-    })
-  }
-  rm_media_info( id ){
-    let tar = this.get_media(id) ;
-        
-    this._arr.splice( this._arr.indexOf(tar) , 1) ;
-    fs.unlinkSync( tar.name )
-  }
-}
-var C_Media = new M_Array ;
-
-function getVideoInfo ( videoUrl , format , call ) {
+export default function handler ( req , res ) {
   var is_audio = type => {
     return ( type === 'mp3' ) ?
       {
@@ -32,7 +10,7 @@ function getVideoInfo ( videoUrl , format , call ) {
       {
         format : 'best'
       }
-  } , options = Object.assign( is_audio(format) , {
+  } , options = Object.assign( is_audio(req.query.F) , {
         noCheckCertificates: true,
         noWarnings: true,
         addHeader: [
@@ -42,54 +20,19 @@ function getVideoInfo ( videoUrl , format , call ) {
       } );
 
 
-  youtubedl( videoUrl , Object.assign( options , {
+  youtubedl( req.query.URL , Object.assign( options , {
           paths : './output/'  
-        } ) ).then( err => console.log(err) ) ;
+        } ) );
 
-  youtubedl( videoUrl , Object.assign( options , {
+  youtubedl( req.query.URL , Object.assign( options , {
     dumpSingleJson: true ,
     } ) ).then(
       data => {
-        call(data)
+        res.json( { info : data } ) 
       } ,
       err => console.error(err)
   );
+  
 } ;
 
 ///
-
-export default function handler ( req , res ){
-  switch ( req.query.WHAT ) {
-    case 'info' :
-      var URL = req.query.URL ;
-      getVideoInfo( URL , req.query.F , data => {
-        var newMedia = {
-          url : URL ,
-          id : data.display_id ,
-          title : data.title ,
-          duration : data.duration_string ,
-          size : ((
-            ( data.filesize !== null ) ? data.filesize : 
-            data.filesize_approx
-          ) / 1000000).toFixed(2) + 'MB' ,
-          media_type : req.query.F ,
-          name  : ( req.query.F === 'mp4' ) ?
-            data.requested_downloads[0]._filename :
-            '.' + (data.requested_downloads[0]._filename.split('.')[1]) + '.' + data.acodec
-            
-        } ;
-        C_Media.set_media_info(newMedia) ;
-        res.json({ nM : newMedia , media : C_Media._arr }) 
-      } )
-    break ;
-    case 'rm' :
-      C_Media.rm_media_info(req.query.ID) ;
-      res.end() 
-    break ;
-    case 'download' :
-      res.download( C_Media.get_media( req.query.ID ).name )
-    break ;
-    default : 
-      res.status(404).json({ message : ' Relax! ' })
-  }
-}

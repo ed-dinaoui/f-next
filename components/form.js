@@ -18,7 +18,7 @@ export function DoBtn(props) {
   return (
     <button
       onClick={() => {
-        window.open("download?ID=" + props.tl, "_blank");
+        window.open(`${process.env.ROOT}/api/dow?ID=${props.tl}`, "_blank");
       }}
     >
       do.
