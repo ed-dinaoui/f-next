@@ -10,7 +10,7 @@ var f_click = call => {
           va = ( s.length <= 8 ) ? s.replace('.' , '') : s.split('.')[1] ;
       if( va === 'youtube' ){
         call(true) ;
-        fetch(  "/api/server?WHAT=info&F=mp4&URL=" + val)
+        fetch(  "/api/server?WHAT=info&F=mp4&URL=" + val) 
           .then((res) => res.json())
           .then( d => {
             up_ga_a() ;
