@@ -1,8 +1,6 @@
 import { useState } from 'react' ;
 import { DoBtn } from './form' ;
 
-export var up_ga_a ;
-
 
 function InfoCard (props) {
     const [ is , set_is ] = useState(true) ;
@@ -44,16 +42,11 @@ function InfoCard (props) {
 function Info (props) {
     const [ a , set_a ] = useState([])
     
-    up_ga_a = () => {
-        props.c_media( d => {
-            d.media.forEach(ob => {
-                set_a( a.concat(<InfoCard p={ob} click={props.click} close={props.close} />) ) ;
-            } ) 
-        } )
-    } ;
-    
-    
-    
+    props.c_media( d => {
+        d.media.forEach(ob => {
+            set_a( a.concat(<InfoCard p={ob} click={props.click} close={props.close} />) ) ;
+        } ) 
+    } )
     
     
     
