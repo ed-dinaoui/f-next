@@ -11,12 +11,12 @@ export default function handler ( req , res ) {
         format : 'best'
       }
   } , options = Object.assign( is_audio(req.query.F) , {
-        noCheckCertificates: true,
-        noWarnings: true,
-        addHeader: [
-          'referer:youtube.com',
-          'user-agent:googlebot'
-        ] ,
+        //noCheckCertificates: true,
+        //noWarnings: true,
+        //addHeader: [
+        //  'referer:youtube.com',
+        //  'user-agent:googlebot'
+        //] ,
       } );
 
 
