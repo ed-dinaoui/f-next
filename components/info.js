@@ -39,26 +39,4 @@ function InfoCard (props) {
 }
 
 
-function Info (props) {
-    const [ a , set_a ] = useState([])
-    
-    props.c_media( d => {
-        d.media.forEach(ob => {
-            set_a( a.concat(<InfoCard p={ob} click={props.click} close={props.close} />) ) ;
-        } ) 
-    } )
-    
-    
-    
-    return (
-        <div>
-            {a}
-        </div>
-    )
-}
-
-
-
-
-
-export default Info ;
+export default InfoCard ;

@@ -79,15 +79,12 @@ export default function handler ( req , res ){
             
         } ;
         C_Media.set_media_info(newMedia) ;
-        res.json({ nM : newMedia }) 
+        res.json({ nM : newMedia , media : C_Media._arr }) 
       } )
     break ;
     case 'rm' :
       C_Media.rm_media_info(req.query.ID) ;
       res.end() 
-    break ;
-    case 'media' :
-      res.json({ media : C_Media._arr }) 
     break ;
     case 'download' :
       res.download( C_Media.get_media( req.query.ID ).name )
