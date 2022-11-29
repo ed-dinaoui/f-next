@@ -1,7 +1,6 @@
 import { useState } from "react";
 import InfoCard from "../components/info";
 import AddBtn, { DoAllBtn, Input } from "../components/form";
-import AES from 'crypto-js/aes' ;
 
 class M_Array {
   constructor(  ){
@@ -9,26 +8,23 @@ class M_Array {
   }
   set_media_info( url , format , callBack ){
     
-    fetch(`${process.env.ROOT}/api/server?F=${format}&URL=${encodeURIComponent(AES.encrypt(url , '$n[ex+t-@f-01ed').toString())}`)
+    fetch(`${process.env.ROOT}/api/server?F=${format}&URL=${encodeURIComponent(url)}`)
     .then(res => res.json())
-    .then(d => {
-      var data = d.info ,
-          newMedia = {
-        url : url ,
-        id : data.display_id ,
-        title : data.title ,
-        duration : data.duration_string ,
-        size : ((
-          ( data.filesize !== null ) ? data.filesize : 
-          data.filesize_approx
-        ) / 1000000).toFixed(2) + 'MB' ,
-        media_type : format ,
-        name  : ( format === 'mp4' ) ?
-          data.requested_downloads[0]._filename :
-          '.' + (data.requested_downloads[0]._filename.split('.')[1]) + '.' + data.acodec
-          
-      } ;
-      console.log(newMedia)
+    .then(data => {
+      var newMedia = {
+            url : url ,
+            id : data.display_id ,
+            title : data.title ,
+            duration : data.duration_string ,
+            size : ((
+              ( data.filesize !== null ) ? data.filesize : 
+              data.filesize_approx
+            ) / 1000000).toFixed(2) + 'MB' ,
+            media_type : format ,
+            name  : ( format === 'mp4' ) ?
+              data.requested_downloads[0]._filename :
+              '.' + (data.requested_downloads[0]._filename.split('.')[1]) + '.' + data.acodec
+          } ;
       this._arr.push(newMedia) ;
       callBack(newMedia , this._arr) ;
     })
