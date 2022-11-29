@@ -1,5 +1,5 @@
 const youtubedl = require('youtube-dl-exec') ;
-      
+
 export default function handler ( req , res ) {
   var is_audio = type => {
     return ( type === 'mp3' ) ?
@@ -21,7 +21,7 @@ export default function handler ( req , res ) {
 
 
   youtubedl( req.query.URL , Object.assign( options , {
-          paths : './output/'  
+          paths : `${process.env.ROOT}/output/`
         } ) );
 
   youtubedl( req.query.URL , Object.assign( options , {
