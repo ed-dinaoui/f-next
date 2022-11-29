@@ -1,4 +1,6 @@
 const youtubedl = require('youtube-dl-exec') ;
+import { enc } from 'crypto-js' ;
+import AES from 'crypto-js/aes' ;
 
 export default function handler ( req , res ) {
   var is_audio = type => {
@@ -17,14 +19,17 @@ export default function handler ( req , res ) {
           'referer:youtube.com',
           'user-agent:googlebot'
         ] ,
-      } );
+      } ) ,
+      URL = AES.decrypt( decodeURIComponent(req.query.URL) , '$n[ex+t-@f-01ed').toString(enc.Utf8) ;
+      
+  console.log('URL : '+URL , 'url  : '+ req.query.URL) ;
 
 
-  youtubedl( req.query.URL , Object.assign( options , {
-          paths : `${process.env.ROOT}/output/`
+  youtubedl( URL , Object.assign( options , {
+          paths : `public/output/`
         } ) );
 
-  youtubedl( req.query.URL , Object.assign( options , {
+  youtubedl( URL , Object.assign( options , {
     dumpSingleJson: true ,
     } ) ).then(
       data => {
