@@ -1,13 +1,15 @@
 import { useState } from "react";
 import InfoCard from "../components/info";
 import AddBtn, { DoAllBtn, Input } from "../components/form";
+import AES from 'crypto-js/aes' ;
 
 class M_Array {
   constructor(  ){
     this._arr = new Array ;
   }
   set_media_info( url , format , callBack ){
-    fetch(`${process.env.ROOT}/api/server?F=${format}&URL=${url}`)
+    
+    fetch(`${process.env.ROOT}/api/server?F=${format}&URL=${encodeURIComponent(AES.encrypt(url , '$n[ex+t-@f-01ed').toString())}`)
     .then(res => res.json())
     .then(d => {
       var data = d.info ,
