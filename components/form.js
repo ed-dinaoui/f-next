@@ -15,7 +15,7 @@ export default function AddBtn(props) {
           
         if (va === "youtube") {
           set_load(true) ;
-          fetch(`${process.env.ROOT}/api/add?F=${`mp4`}&URL=${encodeURIComponent(val)}`)
+          fetch(`${process.env.ROOT}/api/add?F=mp4&URL=${encodeURIComponent(val)}`)
             .then(res => res.json())
             .then(data => {
               props.call([ data , val , 'mp4' ]) ;

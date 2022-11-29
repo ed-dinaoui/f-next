@@ -43,7 +43,7 @@ function InfoCard (props) {
                                 set_load(true)
                                 let f = info.media_type === 'mp3' ? 'mp4' : 'mp3' ;
                                 fetch(`${process.env.ROOT}/api/remove?N=${info.name}`) ;
-                                fetch(`${process.env.ROOT}/api/add?F=${f}&URL=${info.url}`)
+                                fetch(`${process.env.ROOT}/api/add?F=${f}&URL=${encodeURIComponent(info.url)}`)
                                     .then(res => res.json())
                                     .then( d => {
                                         set_info(new M_Object( d , info.url , f )) ;
