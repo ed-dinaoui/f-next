@@ -1,21 +1,6 @@
 import { useState } from 'react' ;
 import { DoBtn } from './form' ;
 
-export class M_Object {
-  constructor( params , url , f  ){
-    this.url = url ;
-    this.id = params.display_id ;
-    this.title = params.title ;
-    this.duration = params.duration_string ;
-    this.size = ( ( (params.filesize !== null) ? 
-      params.filesize : 
-      params.filesize_approx  ) / 1000000 ).toFixed(2) + "MB" ,
-    this.media_type = f ,
-    this.name = ( f === 'mp4' ) ? 
-      params.requested_downloads[0]._filename :
-      '.' + ( params.requested_downloads[0]._filename.split('.')[1] ) + '.' + params.acodec
-  }
-}
 
 function InfoCard (props) {
     const [ is , set_is ] = useState(true) ;
@@ -46,7 +31,7 @@ function InfoCard (props) {
                                 fetch(`${process.env.ROOT}/api/add?F=${f}&URL=${encodeURIComponent(info.url)}`)
                                     .then(res => res.json())
                                     .then( d => {
-                                        set_info(new M_Object( d , info.url , f )) ;
+                                        set_info( d ) ;
                                         set_load(false)
                                     } )
                              }
