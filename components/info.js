@@ -4,7 +4,7 @@ import { DoBtn } from './form' ;
 export class M_Object {
   constructor( params , url , f  ){
     this.url = url ;
-    this.id = params.id ;
+    this.id = params.display_id ;
     this.title = params.title ;
     this.duration = params.duration_string ;
     this.size = ( ( (params.filesize !== null) ? 
