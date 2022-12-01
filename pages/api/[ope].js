@@ -1,6 +1,23 @@
 const fs = require('fs') ,
       youtubedl = require('youtube-dl-exec') ;
 
+class M_Object {
+  constructor( params , url , f  ){
+    this.url = url ;
+    this.id = params.display_id ;
+    this.title = params.title ;
+    this.duration = params.duration_string ;
+    this.size = ( ( (params.filesize !== null) ? 
+      params.filesize : 
+      params.filesize_approx  ) / 1000000 ).toFixed(2) + "MB" ,
+    this.media_type = f ,
+    this.name = ( f === 'mp4' ) ? 
+      params.requested_downloads[0]._filename :
+      '.' + ( params.requested_downloads[0]._filename.split('.')[1] ) + '.' + params.acodec
+  }
+}
+
+
 export default async function handler ( req , res ) {
   var qu = req.query ;
   
@@ -35,7 +52,7 @@ export default async function handler ( req , res ) {
           res.statusCode = 200
           res.setHeader('Content-Type', 'application/json');
           res.setHeader('Cache-Control', 'max-age=180000');
-          res.end(JSON.stringify(data))
+          res.end(JSON.stringify(new M_Object( data , URL , qu.F )))
           //res.json( data )
           //res.status(200).end()
         } ,
