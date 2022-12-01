@@ -43,7 +43,7 @@ export default async function handler ( req , res ) {
         
     youtubedl( URL , Object.assign( options , {
             paths : `/output/`
-        } ) ) ;
+        } ) ).catch(err => console.log(err)) ;
 
     youtubedl( URL , Object.assign( options , {
       dumpSingleJson: true ,
