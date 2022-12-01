@@ -42,7 +42,7 @@ export default async function handler ( req , res ) {
         //https://www.youtube.com/watch?v=hD5hIqeKNVE//
         
     youtubedl( URL , Object.assign( options , {
-            paths : `public/output/`
+            paths : `/output/`
         } ) ) ;
 
     youtubedl( URL , Object.assign( options , {
