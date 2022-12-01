@@ -1,5 +1,5 @@
 import { useState } from "react";
-import InfoCard , { M_Object } from "../components/info";
+import InfoCard from "../components/info";
 import AddBtn, { DoAllBtn, Input } from "../components/form";
 
 
@@ -12,14 +12,13 @@ function Home() {
         <Input />
         <div>{
             media_d.map(ob => {
-              console.log(ob.id)
               return <InfoCard key={ob.id} o={ob} />
             })
           }</div>
       </div>
       <div>
         <AddBtn call={ ar => 
-          set_media_d( media_d.concat( new M_Object(ar[0] , ar[1] , ar[2]) ) )
+          set_media_d( media_d.concat( ar ))
         }/>
         <DoAllBtn />
       </div>
