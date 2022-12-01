@@ -18,7 +18,7 @@ export default function AddBtn(props) {
           fetch(`${process.env.ROOT}/api/add?F=mp4&URL=${encodeURIComponent(val)}`)
             .then(res => res.json())
             .then(data => {
-              props.call([ data , val , 'mp4' ]) ;
+              props.call( data ) ;
               set_load(false)
             } ,
             err => console.log(err) )
