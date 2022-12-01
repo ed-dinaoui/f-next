@@ -20,7 +20,8 @@ export default function AddBtn(props) {
             .then(data => {
               props.call([ data , val , 'mp4' ]) ;
               set_load(false)
-            } )
+            } ,
+            err => console.log(err) )
         }
       }
       

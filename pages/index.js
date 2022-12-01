@@ -12,7 +12,8 @@ function Home() {
         <Input />
         <div>{
             media_d.map(ob => {
-              return <InfoCard o={ob} />
+              console.log(ob.id)
+              return <InfoCard key={ob.id} o={ob} />
             })
           }</div>
       </div>

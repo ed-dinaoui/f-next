@@ -1,7 +1,7 @@
 const fs = require('fs') ,
       youtubedl = require('youtube-dl-exec') ;
 
-export default function handler ( req , res ) {
+export default async function handler ( req , res ) {
   var qu = req.query ;
   
   if( qu.ope === 'add' ){
@@ -22,24 +22,35 @@ export default function handler ( req , res ) {
               ] ,
         } ) ;
         
-    youtubedl( URL , Object.assign( options , {
-            paths : `public/output/`
-          } ) );
+        //https://www.youtube.com/watch?v=hD5hIqeKNVE//
+        
+    //youtubedl( URL , Object.assign( options , {
+    //        paths : `public/output/`
+    //    } ) ) ;
 
     youtubedl( URL , Object.assign( options , {
       dumpSingleJson: true ,
       } ) ).then(
         data => {
-          res.json( data ) 
+          res.statusCode = 200
+          res.setHeader('Content-Type', 'application/json');
+          res.setHeader('Cache-Control', 'max-age=180000');
+          res.end(JSON.stringify(data))
+          //res.json( data )
+          //res.status(200).end()
         } ,
-        err => console.error(err)
+        err => {
+          console.log(err)
+          res.status(500).end()
+        }
     )
   }else if( qu.ope === 'remove' ){
     fs.unlinkSync( qu.N )
     res.end()
   }else if( qu.ope === 'download' ){
     res.download( qu.N )
-  }else {
+  }
+  else {
     res.status(505).json({ message : 'Rilax!' })
   }
   
